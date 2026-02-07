@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const { getAllPosts, getPostById, createPost, updatePost, deletePost, getMyPosts } = require('../controllers/posts.controller');
+const { authenticateToken } = require('../middleware/auth');
+const { validateCreatePost } = require('../middleware/validateData');
+router.get('/', getAllPosts);
+router.get('/my-posts', authenticateToken, getMyPosts);
+router.get('/:id', getPostById);
+router.post('/', authenticateToken, validateCreatePost, createPost);
+router.put('/:id', authenticateToken, updatePost);
+router.delete('/:id', authenticateToken, deletePost);
+module.exports = router;
