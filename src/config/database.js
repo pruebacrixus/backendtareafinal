@@ -7,6 +7,7 @@ const pool = new Pool({
   database: process.env.DB_NAME || 'marketplace_db',
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT || 5432,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false, // 👈 LÍNEA NUEVA
   max: 20, // Máximo de conexiones
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
